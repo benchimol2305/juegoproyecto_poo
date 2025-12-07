@@ -17,3 +17,14 @@ class GamePanel extends JPanel implements ActionListener{
     public static final int VERTICAL_UNITS = SCREEN_HEIGHT/UNIT_SIZE;
     public static final int DELAY = 100; // Retardo del temporizador en milisegundos
     public static final int INITIAL_SNAKE_SIZE = 6; // tamanp inicial de la serpiente
+
+    // Variables de estado del juego
+    private boolean running = false;
+    private int appleX;
+    private int appleY;
+    private Timer timer = new Timer(DELAY, this);
+    private char direction;
+    private int[] snakeX = new int[GAME_UNITS];
+    private int[] snakeY = new int[GAME_UNITS];
+    private int snakeSize;
+    private int applesEaten;
