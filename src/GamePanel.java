@@ -44,3 +44,20 @@ class GamePanel extends JPanel implements ActionListener{
             "Uhh que manco!", "mejor ve a jugar barbie"};
     String randomGameOverMessage = "";
     private Score actualScore;
+
+    // Constructor del panel del juego
+    GamePanel(JFrame frame){
+        parentFrame = (SnakeFrame) frame;
+
+        // El panel debe ser enfocable para recibir eventos de teclado
+        this.setFocusable(true);
+        this.requestFocus();
+        this.addKeyListener(new MyKeyAdapter());
+        this.setPreferredSize(new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT));
+        this.setBackground(Color.black);
+    }
+
+    // Método para iniciar el juego
+    public void startGame(){
+        snakeSize = INITIAL_SNAKE_SIZE;
+        applesEaten = 0;
