@@ -28,3 +28,19 @@ class GamePanel extends JPanel implements ActionListener{
     private int[] snakeY = new int[GAME_UNITS];
     private int snakeSize;
     private int applesEaten;
+
+    SnakeFrame parentFrame;
+    boolean keyInput = false;
+
+    // Variables para el sistema de puntuacion
+    private int lowestScore;
+    private ArrayList<Score> scoreList = new ArrayList<Score>();
+    private boolean showJTextField = false;
+    private String playerName = "";
+
+    // Mensajes aleatorios para cuando termina el juego
+    String[] gameOverMessages = {"suerte la proxima!", "Lo sentimos querido!", "Dale que se puede!",
+            "GG WP", "Hora de dormir zzz", "cambia de teclado", "Ow :(",
+            "Uhh que manco!", "mejor ve a jugar barbie"};
+    String randomGameOverMessage = "";
+    private Score actualScore;
