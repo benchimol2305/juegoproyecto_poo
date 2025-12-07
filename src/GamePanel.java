@@ -113,3 +113,56 @@ class GamePanel extends JPanel implements ActionListener{
         eatApple(); // Verifica si se comió una manzana
         repaint(); // Vuelve a dibujar el panel
     }
+
+    // Metodo para dibujar componentes graficos
+    public void paintComponent(Graphics g){
+        super.paintComponent(g); // Llama al metodo de la superclase
+
+        // Dibujar manzana en appleX y appleY
+        g.setColor(Color.red);
+        g.fillOval(appleX , appleY, UNIT_SIZE, UNIT_SIZE);
+
+        // Dibujar cabeza de la serpiente
+        g.setColor(Color.green);
+        g.fillRect(snakeX[0], snakeY[0], UNIT_SIZE, UNIT_SIZE);
+        // Dibujar cuerpo de la serpiente
+        for(int i = 1; i < snakeSize; i++){
+            g.fillRect(snakeX[i], snakeY[i], UNIT_SIZE, UNIT_SIZE);
+        }
+
+        // Dibujar cadena de puntuacion
+        g.setColor(Color.white);
+        g.setFont(new Font("MS Gothic", Font.PLAIN, 25));
+        FontMetrics fontSize = g.getFontMetrics();
+        int fontX = SCREEN_WIDTH - fontSize.stringWidth("Puntaje: " + applesEaten) - 10;
+        int fontY = fontSize.getHeight();
+        g.drawString("Puntaje: " + applesEaten, fontX, fontY);
+
+
+        if(!timer.isRunning()){
+            // Imprimir pantalla de fin de juego
+            g.setColor(Color.white);
+            g.setFont(new Font("MS Gothic", Font.PLAIN, 58));
+            String message = randomGameOverMessage;
+            fontSize = g.getFontMetrics();
+            fontX = (SCREEN_WIDTH - fontSize.stringWidth(message)) / 2 ;
+            fontY = (SCREEN_HEIGHT - fontSize.getHeight()) /2;
+            g.drawString(message, fontX, fontY);
+
+            g.setFont(new Font("MS Gothic", Font.PLAIN, 24));
+            message = "Presiona F2 para reiniciar";
+            fontSize = g.getFontMetrics();
+            fontX = (SCREEN_WIDTH - fontSize.stringWidth(message)) / 2 ;
+            fontY = fontY + fontSize.getHeight() + 20;
+            g.drawString(message, fontX, fontY);
+
+
+            if(showJTextField){
+                drawJTextField(g);
+                drawPlayerName(g);
+            }
+        }
+    }
+
+
+
