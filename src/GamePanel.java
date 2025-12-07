@@ -96,3 +96,20 @@ class GamePanel extends JPanel implements ActionListener{
             System.out.println("Error trying to read file");
         }
     }
+
+    // Metodo para cargar la puntuacion mas baja del top 10
+    public void loadLowestScore(){
+        // Ordena la lista de mayor a menor
+        scoreList.sort(Comparator.reverseOrder());
+        lowestScore = scoreList.get(9).getScore(); // Obtiene la décima puntuación (la más baja del top 10)
+        System.out.println("lowestScore: " + lowestScore);
+    }
+
+
+    // Metodo ejecutado por el temporizador en cada ciclo
+    public void actionPerformed(ActionEvent ev){
+        move(); // Mueve la serpiente
+        checkCollision(); // Verifica colisiones
+        eatApple(); // Verifica si se comió una manzana
+        repaint(); // Vuelve a dibujar el panel
+    }
