@@ -57,7 +57,42 @@ class GamePanel extends JPanel implements ActionListener{
         this.setBackground(Color.black);
     }
 
-    // Método para iniciar el juego
+    // Metodo para iniciar el juego
     public void startGame(){
         snakeSize = INITIAL_SNAKE_SIZE;
         applesEaten = 0;
+
+        for(int i = 0; i < snakeSize; i++){
+            snakeX[i] = 0;
+            snakeY[i] = 0;
+        }
+        direction = 'R';
+        timer.start();
+        newApple();
+        System.out.println("Initialized game panel startGame()");
+        loadScoreList();
+        loadLowestScore();
+        randomGameOverMessage = gameOverMessages[random(gameOverMessages.length)];
+    }
+
+    // Metodo para cargar la lista de puntuaciones desde archivo
+    public void loadScoreList(){
+        try{
+            scoreList.clear();
+            BufferedReader buffer = new BufferedReader(new FileReader(new File("scores.data")));
+            String line;
+            String[] nameScore;
+            Score aux;
+
+
+            while((line = buffer.readLine()) != null){
+                nameScore = line.split(",");
+                aux = new Score(nameScore[0], Integer.parseInt(nameScore[1]));
+                scoreList.add(aux);
+            }
+            System.out.println("ArrayList loaded successfully");
+            System.out.println(scoreList);
+        }catch(Exception ex){
+            System.out.println("Error trying to read file");
+        }
+    }
